@@ -11,6 +11,23 @@ opens the agent shown on a key in Paseo with one press.
 Paseo Control only reads agent state. It never sends messages to agents,
 never stops them and never approves permissions.
 
+## Preview
+
+These illustrations show the plugin with sample data.
+
+![Eight agent keys and the Agent pages dial](docs/images/gallery-1-agent-keys.png)
+
+<details>
+<summary>See the Project, Usage and Attention dials</summary>
+
+![Previewing and selecting a project with the Project dial](docs/images/gallery-2-project-dial.png)
+
+![Usage dial showing quota and reset time](docs/images/gallery-3-usage-dial.png)
+
+![Attention dial showing an agent that needs a response](docs/images/gallery-4-attention-dial.png)
+
+</details>
+
 ## Requirements
 
 - macOS 12 or later and the Stream Deck app 7.1 or later (from the plugin
