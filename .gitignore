@@ -1,0 +1,35 @@
+# Dependencies and generated output
+node_modules/
+# npm download cache kept inside the project (npm --cache .npm)
+.npm/
+# Verified scanner binaries downloaded by scripts/secret-scan
+.cache/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+*.streamDeckPlugin
+# Stream Deck plugin build output and runtime logs (as in the @elgato/cli template)
+*.sdPlugin/bin/
+# Built from src/inspector/page by `npm run plugin:bundle` (rollup).
+*.sdPlugin/ui/connection.js
+*.sdPlugin/logs/
+# Packaged plugin output of `npm run plugin:pack`
+release/
+
+# Secrets and local configuration
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+.npmrc
+
+# Logs and operating system files
+*.log
+.DS_Store
+
+# Local editor settings
+.idea/
+.vscode/

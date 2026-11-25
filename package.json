@@ -1,0 +1,60 @@
+{
+  "name": "paseo-streamdeck",
+  "version": "0.1.4",
+  "private": true,
+  "description": "Paseo Control: Elgato Stream Deck + plugin for Paseo agents",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "build": "tsc -p tsconfig.build.json",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run plugin:pack && npm run notices:check",
+    "deps:audit": "npm audit --audit-level=high",
+    "secrets:staged": "node scripts/secret-scan/cli.ts staged",
+    "secrets:history": "node scripts/secret-scan/cli.ts history",
+    "secrets:selftest": "node scripts/secret-scan/cli.ts selftest",
+    "hooks:install": "node scripts/secret-scan/cli.ts install-hook",
+    "hooks:status": "node scripts/secret-scan/cli.ts hook-status",
+    "plugin:bundle": "npm run build && rollup -c rollup.config.mjs",
+    "plugin:validate": "streamdeck validate local.paseocontrol.e1spike.sdPlugin --no-update-check",
+    "plugin:inventory": "node scripts/plugin/inventory.ts",
+    "plugin:inspector-smoke": "node scripts/plugin/inspector-smoke.ts",
+    "plugin:pack": "npm run plugin:bundle && npm run plugin:validate && npm run plugin:inventory && npm run plugin:inspector-smoke && streamdeck pack local.paseocontrol.e1spike.sdPlugin --no-update-check --output release --force",
+    "plugin:relay": "node scripts/plugin/dev-relay.ts",
+    "notices:check": "node scripts/plugin/third-party-notices.mjs --check",
+    "release:stage": "node scripts/public/stage-public-source.ts",
+    "release:assemble": "node scripts/public/assemble-release.ts"
+  },
+  "devDependencies": {
+    "@elgato/cli": "1.10.4",
+    "@eslint/js": "10.0.1",
+    "@rollup/plugin-commonjs": "29.0.3",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@types/node": "24.19.2",
+    "eslint": "10.15.0",
+    "prettier": "3.10.1",
+    "rollup": "4.68.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.2"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.8"
+    },
+    "@elgato/utils": {
+      "zod": "4.6.7"
+    }
+  },
+  "dependencies": {
+    "@elgato/streamdeck": "3.0.4",
+    "@getpaseo/client": "0.15.4",
+    "@getpaseo/protocol": "0.15.4"
+  }
+}

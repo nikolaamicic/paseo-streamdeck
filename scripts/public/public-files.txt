@@ -1,0 +1,23 @@
+# Allowlist of the public source tree (scripts/public/release-files.ts).
+# One committed path per line; a directory means every tracked file in it.
+# Everything else stays out. README.md and a root THIRD_PARTY_NOTICES.txt
+# are written by the staging, not listed here.
+.githooks/pre-commit
+.github/workflows/ci.yml
+.gitignore
+LICENSE
+.nvmrc
+.prettierignore
+.prettierrc.json
+eslint.config.js
+package.json
+package-lock.json
+rollup.config.mjs
+tsconfig.json
+tsconfig.build.json
+local.paseocontrol.e1spike.sdPlugin
+scripts/plugin
+scripts/public
+scripts/secret-scan
+src
+test

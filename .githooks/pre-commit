@@ -1,0 +1,6 @@
+#!/bin/sh
+# Secret scan of the staged changes (scripts/secret-scan).
+# Enabled per repository with `npm run hooks:install`. It can be bypassed with
+# `git commit --no-verify`, so it is a safety net, not a guarantee; run
+# `npm run secrets:history` before publishing.
+exec node scripts/secret-scan/cli.ts staged

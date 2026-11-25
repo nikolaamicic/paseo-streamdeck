@@ -1,0 +1,76 @@
+# Checks for pushes to main and for every pull request.
+#
+# Read-only by design: the token may only read the repository contents,
+# the checkout keeps no credentials, no job uses secrets, caches, artifacts
+# or deployments, and nothing is published. `pull_request` (not
+# `pull_request_target`) runs pull requests from forks without secrets and
+# with a read-only token.
+#
+# Actions are pinned to full commit SHAs (release tag in the comment,
+# resolved 2026-11-25 from github.com/actions/checkout and
+# github.com/actions/setup-node); runners are pinned to an image version
+# instead of `-latest`. Updating either is a deliberate commit.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    # The plugin runs only on macOS; type checking, lint, format, tests,
+    # validation and the package are produced on macOS (Apple silicon).
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - run: node --version && npm --version
+      - run: npm ci
+      # Includes the third-party notices gate (notices:check) after the build.
+      - run: npm run check
+
+  dependency-audit:
+    # Reads package-lock.json only; fails for high or critical advisories
+    # (threshold in package.json "deps:audit"). Registry errors fail too.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - run: npm run deps:audit
+
+  secret-scan:
+    # Gitleaks pinned in scripts/secret-scan/gitleaks-binary.ts: the archive
+    # is downloaded from the official release and used only if its SHA-256
+    # matches. The self-test must detect and redact a synthetic token; the
+    # history scan then fails on any finding or scanner error. Output is
+    # redacted and no report is written or uploaded.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Complete history, so a secret added and later removed is found.
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - run: node scripts/secret-scan/cli.ts selftest
+      - run: node scripts/secret-scan/cli.ts history

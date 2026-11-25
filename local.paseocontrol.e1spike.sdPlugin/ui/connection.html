@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Paseo connection</title>
+    <style>
+      body {
+        margin: 10px;
+        font-family: -apple-system, "Helvetica Neue", sans-serif;
+        font-size: 9pt;
+        color: #d0d0d6;
+        background: #2d2d2d;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 9pt;
+        font-weight: 600;
+      }
+      label {
+        display: block;
+        margin: 8px 0 4px;
+      }
+      input {
+        box-sizing: border-box;
+        width: 100%;
+      }
+      p {
+        margin: 6px 0 0;
+      }
+      #connection-details {
+        color: #a6a6ae;
+        white-space: pre-line;
+      }
+      #connection-message {
+        color: #e0b050;
+      }
+      .actions {
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="paseo-connection">
+      <h1>Paseo connection</h1>
+      <p id="connection-status">Connecting to the plugin…</p>
+      <p id="connection-details"></p>
+      <label for="connection-address">Daemon address</label>
+      <input id="connection-address" type="text" spellcheck="false" autocomplete="off" />
+      <div class="actions">
+        <button id="connection-save" type="button" disabled>Save</button>
+        <button id="connection-retry" type="button" hidden>Retry</button>
+        <button id="connection-reconnect" type="button" hidden>Reconnect</button>
+      </div>
+      <p id="connection-message"></p>
+    </section>
+    <script src="connection.js"></script>
+  </body>
+</html>

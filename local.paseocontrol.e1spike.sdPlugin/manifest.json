@@ -1,0 +1,138 @@
+{
+  "Name": "Paseo Control",
+  "Version": "0.1.4.0",
+  "Author": "Paseo Control",
+  "Actions": [
+    {
+      "Name": "Paseo project",
+      "UUID": "local.paseocontrol.e1spike.workspace",
+      "Icon": "imgs/actions/workspace/icon",
+      "Tooltip": "Turn to preview a project, press to show the agents of all its workspaces on the agent keys. Start in is set in the Stream Deck app.",
+      "Controllers": [
+        "Encoder"
+      ],
+      "Encoder": {
+        "layout": "layouts/segment.json",
+        "Icon": "imgs/actions/workspace/dial",
+        "TriggerDescription": {
+          "Rotate": "Preview a project",
+          "Push": "Show the previewed project"
+        }
+      },
+      "PropertyInspectorPath": "ui/workspace.html",
+      "SupportedInMultiActions": false,
+      "States": [
+        {
+          "Image": "imgs/actions/workspace/dial"
+        }
+      ]
+    },
+    {
+      "Name": "Paseo usage",
+      "UUID": "local.paseocontrol.e1spike.usage",
+      "Icon": "imgs/actions/usage/icon",
+      "Tooltip": "Shows account usage reported by Paseo (quota windows and balances). Turn to browse, press for the first item.",
+      "Controllers": [
+        "Encoder"
+      ],
+      "Encoder": {
+        "layout": "layouts/usage.json",
+        "Icon": "imgs/actions/usage/dial",
+        "TriggerDescription": {
+          "Rotate": "Previous or next usage item",
+          "Push": "First usage item"
+        }
+      },
+      "PropertyInspectorPath": "ui/connection.html",
+      "SupportedInMultiActions": false,
+      "States": [
+        {
+          "Image": "imgs/actions/usage/dial"
+        }
+      ]
+    },
+    {
+      "Name": "Paseo attention",
+      "UUID": "local.paseocontrol.e1spike.attention",
+      "Icon": "imgs/actions/attention/icon",
+      "Tooltip": "Agents on this Paseo host that wait for an answer, an approval or have an error. Turn to browse, press to open the shown agent in Paseo.",
+      "Controllers": [
+        "Encoder"
+      ],
+      "Encoder": {
+        "layout": "layouts/attention.json",
+        "Icon": "imgs/actions/attention/dial",
+        "TriggerDescription": {
+          "Rotate": "Previous or next agent",
+          "Push": "Open this agent in Paseo"
+        }
+      },
+      "PropertyInspectorPath": "ui/connection.html",
+      "SupportedInMultiActions": false,
+      "States": [
+        {
+          "Image": "imgs/actions/attention/dial"
+        }
+      ]
+    },
+    {
+      "Name": "Paseo agent pages",
+      "UUID": "local.paseocontrol.e1spike.pages",
+      "Icon": "imgs/actions/pages/icon",
+      "Tooltip": "Turn to page through the agent keys, eight agents per page; press for page 1.",
+      "Controllers": [
+        "Encoder"
+      ],
+      "Encoder": {
+        "layout": "layouts/segment.json",
+        "Icon": "imgs/actions/pages/dial",
+        "TriggerDescription": {
+          "Rotate": "Previous or next page",
+          "Push": "First page"
+        }
+      },
+      "PropertyInspectorPath": "ui/connection.html",
+      "SupportedInMultiActions": false,
+      "States": [
+        {
+          "Image": "imgs/actions/pages/dial"
+        }
+      ]
+    },
+    {
+      "Name": "Paseo agent",
+      "UUID": "local.paseocontrol.e1spike.slot",
+      "Icon": "imgs/actions/slot/icon",
+      "Tooltip": "Shows one agent of the project chosen on the Project dial; press opens that agent.",
+      "Controllers": [
+        "Keypad"
+      ],
+      "PropertyInspectorPath": "ui/connection.html",
+      "SupportedInMultiActions": false,
+      "States": [
+        {
+          "Image": "imgs/actions/slot/key"
+        }
+      ]
+    }
+  ],
+  "Category": "Paseo Control",
+  "CategoryIcon": "imgs/plugin/category-icon",
+  "CodePath": "bin/plugin.js",
+  "Description": "Shows Paseo agents on Stream Deck + and opens the shown agent in Paseo. For local use with a local Paseo daemon.",
+  "Icon": "imgs/plugin/marketplace",
+  "SDKVersion": 3,
+  "Software": {
+    "MinimumVersion": "7.1"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "12"
+    }
+  ],
+  "Nodejs": {
+    "Version": "24"
+  },
+  "UUID": "local.paseocontrol.e1spike"
+}
